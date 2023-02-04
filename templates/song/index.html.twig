@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Song index
+{% endblock %}
+
+{% block body %}
+	<h1>Song index</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Label</th>
+				<th>Duration</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for song in songs %}
+				<tr>
+					<td>{{ song.id }}</td>
+					<td>{{ song.label }}</td>
+					<td>{{ song.duration }}</td>
+					<td>
+						<a href="{{ path('song_show', {'id': song.id}) }}">show</a>
+						{% if is_granted('ROLE_ADMIN') %}
+							<a href="{{ path('song_edit', {'id': song.id}) }}">edit</a>
+						{% endif %}
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="4">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{% if app.user %}
+		<a href="{{ path('song_new') }}">Create new</a>
+		{% else %}
+		You must be connected to add new song <a href="{{ path('app_register') }}">Register</a> or <a href="{{ path('app_login') }}">Login</a>
+	{% endif %}
+{% endblock %}

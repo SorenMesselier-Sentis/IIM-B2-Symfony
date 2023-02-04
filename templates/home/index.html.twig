@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!
+{% endblock %}
+
+{% block body %}
+	<div class="has-bg-img">
+		<img class="bg-img w-100 position-fixed" src="{{ asset("/img/header_wallpaper.jpg") }}" alt="background"><br><br><br><br><br><br><br><br><br><br><br><br><br>
+		<div class="card text-center text-white bg-dark container">
+			<div class="card-body">
+				<h5 class="card-title">Music Thing</h5>
+				<p class="card-text">This is my rendering project for a symfony module </p>
+			</div>
+			<div class="card-footer">
+				All right reserved - Soren MESSELIER-SENTIS
+			</div>
+		</div>
+	</div>
+{% endblock %}

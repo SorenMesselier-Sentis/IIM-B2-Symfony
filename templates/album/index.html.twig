@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Album index
+{% endblock %}
+
+{% block body %}
+	<h1>Album index</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Label</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for album in albums %}
+				<tr>
+					<td>{{ album.id }}</td>
+					<td>{{ album.label }}</td>
+					<td>
+						<a href="{{ path('album_show', {'id': album.id}) }}">show</a>
+						{% if is_granted('ROLE_ADMIN') %}
+							<a href="{{ path('album_edit', {'id': album.id}) }}">edit</a>
+						{% endif %}
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="3">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{% if app.user %}
+		<a href="{{ path('album_new') }}">Create new</a>
+	{% else %}
+		You must be connected to add your new album <a href="{{ path('app_register') }}">Register</a> or <a href="{{ path('app_login') }}">Login</a>
+	{% endif %}
+{% endblock %}
